@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  namespace :admin do
+    resources :items
+    post 'items' => 'items#create'
+  end
   root to: 'homes#top'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'top' => 'homes#top'
+  devise_for :customers
+  get 'items/new'
 end
