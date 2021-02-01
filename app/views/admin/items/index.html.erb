@@ -1,1 +1,9 @@
-<h1>index</h1>
+<h1>投稿一覧</h1>
+<p>タイトル</p>
+<% @items.each do |item| %>
+
+  <p><%= item.name %></p>
+  <span>
+    <%= link_to item.name, admin_item_path(item.id) %>
+  </span>
+<% end %>
