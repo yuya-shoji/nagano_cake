@@ -2,3 +2,6 @@
 <p><%= @item.name %></p>
 <h2>本文</h2>
 <p><%= @item.introduction %></p>
+<h2>画像</h2>
+<%= attachment_image_tag @item, :image, :fill, 300, 300, format: 'jpeg' %>
+<%= link_to "編集", edit_admin_item_path(@item.id) %>
