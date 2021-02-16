@@ -1,1 +1,14 @@
-<h1>TOP</h1>
+    <h3><p align="center">ようこそ、ながのCAKEへ！</h3>
+    <h3><p align="center">このサイトは、ケーキ販売のECサイトになります。</h3>
+    <h3><p align="center">会員でない方も商品の閲覧はできますが、</h3>
+    <h3><p align="center">購入には会員登録が必要になります。</h3>
+
+
+<h2>新着商品</h2>
+<div>
+<% @items.each do |item| %>
+<%= attachment_image_tag item, :image, :fill, 200, 200, format: 'jpeg' %>
+<p><%= item.name %></p>
+<p><%= item.price %></p>
+<% end %>
+</div>

@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :admin
   namespace :admin do
-    resources :items
+    root 'homes#top', as: :root
+    resources :items, expect:[:destroy]
+    resources :genres, only:[:index, :create, :edit, :update]
+    resources :customers, only:[:index, :show, :edit, :update]
+    resources :orders, only:[:show, :update]
     post 'items' => 'items#create'
   end
   root to: 'homes#top'
   devise_for :customers
-  get 'items/new'
+  get '/customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw_customers'
+  get 'orders/complete' => 'orders#complete'
+   resources :items, only:[:index, :show]
+   resources :cart_items
+   resources :customers, only:[:index, :create, :edit, :show, :update, :destroy]
+   resources :orders, only:[:new, :index]
+   resources :addresses, expect:[:show, :new]
+   get 'about' => 'homes#about'
 end
