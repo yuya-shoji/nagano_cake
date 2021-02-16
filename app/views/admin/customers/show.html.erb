@@ -1,0 +1,61 @@
+<h2><%= current_customer.last_name %><%= current_customer.first_name %>さんの会員詳細</h2>
+
+<tbody>
+  <div>
+  <tr>
+    <td>会員ID</td>
+      <td><%= current_customer.id %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>氏名</td>
+      <td><%= current_customer.last_name %><%= current_customer.first_name %></td>
+  </tr>
+ </div>
+
+  <div>
+  <tr>
+    <td>フリガナ</td>
+      <td><%= current_customer.last_name_kana %>  <%= current_customer.first_name_kana %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>郵便番号</td>
+      <td><%= current_customer.postal_code %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>住所</td>
+      <td><%= current_customer.address %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>電話番号</td>
+    <td><%= current_customer.telephone_number %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>メールアドレス</td>
+    <td><%= current_customer.email %></td>
+  </tr>
+  </div>
+
+  <div>
+  <tr>
+    <td>会員ステータス</td>
+  </tr>
+  </div>
+
+
+  <%= link_to "編集する", edit_admin_customer_path %>
+  <%= link_to "注文履歴一覧を見る", admin_order_path(current_customer.id) %>

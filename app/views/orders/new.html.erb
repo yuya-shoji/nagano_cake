@@ -1,0 +1,15 @@
+<h2>注文情報入力</h2>
+
+<h3>支払方法</h3>
+<div>
+  <%= radio_button_tag :payment, :クレジットカード %>
+  <%= label_tag :payment, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
+  <%= radio_button_tag :payment, :銀行振込 %>
+  <%= label_tag :payment, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
+</div>
+
+<h3>お届け先</h3>
+<div>
+  <%= radio_button_tag :select, :my_address %>
+  <%= label_tag :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
+  </div>
