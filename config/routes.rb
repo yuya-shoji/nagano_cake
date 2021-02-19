@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   devise_for :customers
   get '/customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw_customers'
-  get 'orders/complete' => 'orders#complete'
+  get '/orders/complete' => 'orders#complete'
+  post '/orders/confirm'=> 'orders#confirm'
    resources :items, only:[:index, :show]
-   resources :cart_items
+   resources :cart_items, only:[:index, :update, :destroy, :create]
    resources :customers, only:[:index, :create, :edit, :show, :update, :destroy]
    resources :orders, only:[:new, :index]
    resources :addresses, expect:[:show, :new]
    get 'about' => 'homes#about'
-end
+   end

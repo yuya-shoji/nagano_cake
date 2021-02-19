@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
 
   def new
+    @addresses = current_customer.addresses
+    @address = Address.new
     @order = Order.new
   end
 
