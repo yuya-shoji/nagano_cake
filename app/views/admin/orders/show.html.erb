@@ -12,13 +12,13 @@
     <tr>
       <td>注文日</td>
       <td>
-
+        <%= @order.created_at %>
       </td>
     </tr>
 
     <tr>
       <td>配送先</td>
       <td>
-
+        <%= "〒" + @order.postal_code %><%= @order.address %><%= @order.name %>
       </td>
     </tr>

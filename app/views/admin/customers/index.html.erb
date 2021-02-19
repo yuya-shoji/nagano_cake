@@ -17,7 +17,7 @@
       <td><%= customer.email %></td>
       <% if customer.is_deleted == true %>
       <td>退会</td>
-      <% elsif customer.is_deleted == false %>
+      <% else %>
       <td>有効</td>
       <% end %>
     </tr>
