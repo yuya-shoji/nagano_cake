@@ -19,7 +19,7 @@
 
  <%= f.submit "新規登録" %>
 
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>郵便番号</th>
@@ -29,11 +29,14 @@
     </thead>
 
     <tbody>
-      <%= @addresses.each do |address| %>
+      <% @addresses.each do |address| %>
       <tr>
         <td><%= address.postal_code %></td>
         <td><%= address.address %></td>
-        <td><%= address.last_name %><%= address.first_name %></td>
+        <td><%= address.name %></td>
+        <td><%= link_to "編集する", edit_address_path(address) %>
+            <%= link_to "削除する", address_path(address), method: :delete %>
+        </td>
       </tr>
     </tbody>
       <% end %>

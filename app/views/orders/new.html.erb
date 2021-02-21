@@ -1,47 +1,44 @@
 <h2>注文情報入力</h2>
-
+<%= form_with model:@order, url:confirm_orders_path, local:true do |f| %>
 <h3>支払方法</h3>
-<div>
-  <%= radio_button_tag :payment, :クレジットカード %>
-  <%= label_tag :payment, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
-  <%= radio_button_tag :payment, :銀行振込 %>
-  <%= label_tag :payment, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
-</div>
+  <div>
+    <%= f.radio_button :payment, 0 %>
+    <%= f.label :payment, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
+    <%= f.radio_button :payment, 1 %>
+    <%= f.label :payment, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
+  </div>
 
 <h3>お届け先</h3>
-<div>
-  <% address = current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
-  <%= radio_button_tag :select, :my_address %>
-  <%= label_tag :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
-</div>
-<div>
-  〒<%= address %><br>
-</div>
-<div>
-  <%= radio_button_tag :select, :select_address %>
-  <%= label_tag :select, "登録済住所から選択", {value: :select_address, style: "display: inline-block;"} %>
-</div>
-<div>
-  <%= select_tag :address, options_for_select(@addresses.map do |address|
-    ["〒" + postal_code + "  " + address + "  " + last_name + first_name]end), {include_blank: '配送先を選択'} %>
-</div>
+  <div>
+    <% address = current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
+    <%= f.radio_button :select, 0 %>
+    <%= f.label :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
+  </div>
+  <div>
+    〒<%= address %><br>
+  </div>
+  <div>
+    <%= f.radio_button :select, 1 %>
+    <%= f.label :select, "登録済住所から選択", {value: :select_address, style: "display: inline-block;"} %>
+  </div>
+    <%= f.collection_select(:address, current_customer.addresses.all, :id, :all_address, {prompt:"選択してください"}) %>
 
-<div>
-  <%= radio_button_tag :select, :new_address %>
-  <%= label_tag :select, "新しいお届け先", {value: :new_address, style: "display: inline-block;"} %>
-</div>
-<%= form_with model:@order, url:'/orders/confirm', local:true do |f| %>
+  <div>
+    <%= f.radio_button :select, 2 %>
+    <%= f.label :select, "新しいお届け先", {value: :new_address, style: "display: inline-block;"} %>
+  </div>
 
-<div>
-  郵便番号(ハイフンなし)   <%= f.text_field :postal_code, placeholder: "0000000" %>
-</div>
-<div>
-  住所   <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
-</div>
-<div>
-  宛名   <%= f.text_field :name, placeholder: "令和道子" %>
-</div>
-<div>
-  <%= submit_tag "確認画面へ進む", class: "btn btn-outline-danger ml-auto" %>
-</div>
-  <% end %>
+
+  <div>
+    郵便番号(ハイフンなし)   <%= f.text_field :postal_code, placeholder: "0000000" %>
+  </div>
+  <div>
+    住所   <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+  </div>
+  <div>
+    宛名   <%= f.text_field :name, placeholder: "令和道子" %>
+  </div>
+  <div>
+    <%= f.submit "確認画面へ進む", class: "btn btn-outline-danger ml-auto" %>
+  </div>
+<% end %>
