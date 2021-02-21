@@ -1,17 +1,24 @@
 <h2>商品詳細</h2>
-  <%= attachment_image_tag @item, :image, size: '50x50', format: "jpeg" %>
-
-    <div>
-      <%= @item.name %>
+  <div class = "container">
+    <div class = "row">
+      <div class = "col col-md-6">
+        <%= attachment_image_tag @item, :image, size: '200x200', format: "jpeg" %>
+      </div>
+      <div class = "col col-md-4">
+        <div>
+          <%= @item.name %>
+        </div>
+        <div>
+          <%= @item.introduction %>
+        </div>
+        <div>
+          <%= @item.price %>
+        </div>
+            <%= form_with model:@cart_item, url: cart_items_path(current_customer.id), local:true do |f| %>
+                <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
+            <% end %>
+      </div>
     </div>
-    <div>
-      <%= @item.introduction %>
-    </div>
-    <div>
-      <%= @item.price %>
-    </div>
-        <%= form_with model:@cart_item, url: cart_items_path(current_customer.id), local:true do |f| %>
-            <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
-            <%= f.hidden_field :item_id, :value => @item.id %>
-            <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
-        <% end %>
+  </div>
