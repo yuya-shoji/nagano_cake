@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.limit(8)
+    @items = Item.all.page(params[:page]).per(8)
     @count = Item.all.count
   end
 

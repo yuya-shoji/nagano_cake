@@ -6,4 +6,4 @@
 
 <%= link_to "退会しない", customer_path(current_customer) %>
 
-<%= link_to "退会する", withdraw_switch_customer_path(@customer),method: :patch %>
+<%= link_to "退会する", withdraw_customers_path(current_customer),method: :patch %>
