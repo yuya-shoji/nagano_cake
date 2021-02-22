@@ -1,9 +1,10 @@
+<h2>商品詳細</h2>
+
+<%= attachment_image_tag @item, :image, :fill, 200, 200, format: 'jpeg' %>
 <h2>商品名</h2>
 <p><%= @item.name %></p>
-<h2>本文</h2>
+<h2>商品説明</h2>
 <p><%= @item.introduction %></p>
-<h2>画像</h2>
-<%= attachment_image_tag @item, :image, :fill, 300, 300, format: 'jpeg' %>
 <h2>ジャンル</h2>
 <p><%= @item.genre.name %></p>
 <h2>税込価格</h2>

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   root to: 'homes#top'
   devise_for :customers
-  get '/customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw_customers'
+  patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw_customers'
   get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe_customers'
   get '/orders/complete' => 'orders#complete',as: 'complete_orders'
    resources :items, only:[:index, :show]
