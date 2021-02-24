@@ -2,10 +2,10 @@
 <%= form_with model:@order, url:confirm_orders_path, local:true do |f| %>
 <h3>支払方法</h3>
   <div>
-    <%= f.radio_button :payment, 0 %>
-    <%= f.label :payment, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
-    <%= f.radio_button :payment, 1 %>
-    <%= f.label :payment, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
+    <%= f.radio_button :payment_method, 0 %>
+    <%= f.label :payment_method, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
+    <%= f.radio_button :payment_method, 1 %>
+    <%= f.label :payment_method, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
   </div>
 
 <h3>お届け先</h3>
@@ -21,7 +21,7 @@
     <%= f.radio_button :select, 1 %>
     <%= f.label :select, "登録済住所から選択", {value: :select_address, style: "display: inline-block;"} %>
   </div>
-    <%= f.collection_select(:address, current_customer.addresses.all, :id, :all_address, {prompt:"選択してください"}) %>
+    <%= f.select :address_id,current_customer.addresses.map{|address| ["〒" +address.postal_code + " " +address.address + " " +address.name,address.id]}, {prompt:"選択してください"} %>
 
   <div>
     <%= f.radio_button :select, 2 %>
