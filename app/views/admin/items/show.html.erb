@@ -15,4 +15,4 @@
 <% elsif @item.is_active==false %>
 <p>販売停止中</p>
 <% end %>
-<%= link_to "編集する", edit_admin_item_path(@item.id) %>
+<%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-success" %>

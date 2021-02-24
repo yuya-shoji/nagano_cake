@@ -1,7 +1,7 @@
 <h2>マイページ</h2>
 
 <p><b>登録情報</b></p>
-<%= link_to "編集する", edit_customer_path(current_customer.id) %>
+<%= link_to "編集する", edit_customer_path(current_customer.id), class: "btn btn-outline-danger" %>
 <table>
     <thead>
 
@@ -16,7 +16,7 @@
 </table>
 
 <h3>配送先</h3>
-<%= link_to "一覧を見る", addresses_path %>
+<%= link_to "一覧を見る", addresses_path, class: "btn btn-primary" %>
 
 <h3>注文履歴</h3>
-<%= link_to "一覧を見る", orders_path %>
+<%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>

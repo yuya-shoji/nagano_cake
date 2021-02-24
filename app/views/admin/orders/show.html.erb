@@ -1,7 +1,8 @@
 <h2>注文履歴詳細</h2>
+<table class= "table table-borderless">
   <tbody>
     <tr>
-      <td>購入者</td>
+      <th>購入者</th>
       <td>
         <%= link_to admin_customer_path(current_customer.id) do %>
         <%= current_customer.last_name %><%= current_customer.first_name %>
@@ -10,15 +11,56 @@
     </tr>
 
     <tr>
-      <td>注文日</td>
+      <th>注文日</th>
       <td>
-        <%= @order.created_at %>
+        <%= @order.created_at.strftime("%Y/%m/%d") %>
       </td>
     </tr>
 
     <tr>
-      <td>配送先</td>
+      <th>配送先</th>
       <td>
         <%= "〒" + @order.postal_code %><%= @order.address %><%= @order.name %>
       </td>
     </tr>
+
+    <tr>
+      <th>支払方法</th>
+      <td>
+        <%= @order.payment_method %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class= "table">
+
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @order_details.each do |detail| %>
+    <tr>
+      <td><%= detail.item.name %></td>
+      <td><%= detail.price %></td>
+      <td><%= detail.amount %></td>
+      <td><%= detail.price*detail.amount %></td>
+      <% @total += detail.price*detail.amount %>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<table class="table table-borderless">
+  <tr>
+    <th>商品合計</th><td><%= @total %></td>
+    <th>送料</th><td>800</td>
+    <th>請求金額合計</th><td><%= @total+800 %></td>
+  </tr>
+</table>

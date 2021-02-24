@@ -7,29 +7,30 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    params[:order][:payment_method] = params[:order][:payment].to_i
-    @order = Order.new(order_params)
+   # @payment_method = params[:order][:payment].to_i
+    obj = order_params
+    obj[:payment_method] = obj[:payment_method].to_i
+    #byebug
+    @order = Order.new(obj)
     if params[:order][:select] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select] == "1"
-     # @order.postal_code = Address.find(params[:order][:postal_code]).postal_code
-     # @order.address = Address.find(params[:order][:address]).address
-     # @order.name = Address.find(params[:order][:address]).last_name
+      address = Address.find(params[:order][:address_id])
+      @order.postal_code = address.postal_code
+      @order.address = address.address
+      @order.name = address.name
     else
-      @address = Address.new(address_params)
-      @address.postal_code= params[:order][:postal_code]
-      @address.address = params[:order][:address]
-      @address.name = params[:order][:name]
-      @address.customer_id = current_customer.id
-      if @address.save!
-        @order.postal_code = @address.postal_code
-        @order.name = @address.name
-        @order.address = @address.address
-      else
-        render :new
-      end
+      # @address = Address.new(address_params)
+      # @address.customer_id = current_customer.id
+    #   if @address.save
+    #     @order.postal_code = @address.postal_code
+    #     @order.name = @address.name
+    #     @order.address = @address.address
+    #   else
+    #     render :new
+    #   end
     end
     @cart_items = CartItem.where(customer_id:current_customer.id)
     @total = 0
@@ -50,7 +51,7 @@ class OrdersController < ApplicationController
     @order_detail.price = cart_item.item.price
     @order_detail.making_status = 0
     @order_detail.order_id = @order.id
-    @order_detail.save
+    @order_detail.save!
     end
     current_customer.cart_items.destroy_all
     redirect_to complete_orders_path
@@ -61,6 +62,10 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
+    @cart_items = CartItem.where(customer_id:current_customer.id)
+    @total = 0
   end
 
   private
@@ -69,7 +74,7 @@ class OrdersController < ApplicationController
   end
 
   def address_params
-    params.permit(:address, :postal_code, :name, :customer_id)
+    params.require(:order).permit(:address, :postal_code, :name, :customer_id)
   end
 
 end

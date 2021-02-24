@@ -17,7 +17,7 @@
     <%= f.text_field :name %>
   </div>
 
- <%= f.submit "新規登録" %>
+ <%= f.submit "新規登録",class:"col-xs btn btn-primary" %>
 
   <table class="table">
     <thead>
@@ -34,8 +34,8 @@
         <td><%= address.postal_code %></td>
         <td><%= address.address %></td>
         <td><%= address.name %></td>
-        <td><%= link_to "編集する", edit_address_path(address) %>
-            <%= link_to "削除する", address_path(address), method: :delete %>
+        <td><%= link_to "編集する", edit_address_path(address), class: "btn btn-success btn-sm" %>
+            <%= link_to "削除する", address_path(address), method: :delete, class: "btn btn-success btn-sm"%>
         </td>
       </tr>
     </tbody>
