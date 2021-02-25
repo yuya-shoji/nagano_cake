@@ -1,12 +1,18 @@
 class ApplicationController < ActionController::Base
     before_action :authenticate_customer!,except: [:top]
     before_action :configure_permitted_parameters, if: :devise_controller?
-    
+
+    def forbit_login_customer
+        if @current_customer
+            redirect_to root_path
+        end
+    end
+
     def after_sign_in_path_for(resource)
-        @customer = current_customer.id
+
         case resource
         when Admin
-            admins_root_path
+            admin_root_path
         when Customer
             customer_path(:id)
         end

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  
+  devise_for :admin, controllers: {
+  sessions:      'admin/sessions',
+  passwords:     'admin/passwords',
+  registrations: 'admin/registrations'
+  }
   namespace :admin do
-      devise_for:admin
+
         root 'homes#top', as: :root
         resources :items, expect:[:destroy]
         resources :genres, only:[:index, :create, :edit, :update]
@@ -10,7 +14,11 @@ Rails.application.routes.draw do
         post 'items' => 'items#create'
   end
       root to: 'homes#top'
-      devise_for :customers
+      devise_for :customers, controllers: {
+      sessions:      'customers/sessions',
+      passwords:     'customers/passwords',
+      registrations: 'customers/registrations'
+      }
       patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw_customers'
       get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe_customers'
       get '/orders/complete' => 'orders#complete',as: 'complete_orders'
@@ -25,4 +33,4 @@ Rails.application.routes.draw do
        end
       resources :addresses, expect:[:show, :new]
       get 'about' => 'homes#about'
-       end
+      end
