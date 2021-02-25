@@ -48,11 +48,8 @@
 
 
     <p>支払方法</p>
-    <% if @order.payment_method == 0 %>
-    <p>クレジットカード</p>
-    <% else %>
-    <p>銀行振込</p>
-    <% end %>
+    <%= @order.payment_method %>
+
 
     <p>お届け先</p>
     <%= @order.postal_code + " " + @order.address + " " + @order.name + " " %>
