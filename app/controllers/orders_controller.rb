@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_customer!
   def new
     @addresses = current_customer.addresses.all
     @address = Address.new
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.save
+    @order.save!
     current_customer.cart_items.each do |cart_item|
     @order_detail = OrderDetail.new
     @order_detail.item_id = cart_item.item_id
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.all.page(params[:page]).per(10)
   end
 
   def show
