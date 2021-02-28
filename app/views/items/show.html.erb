@@ -6,19 +6,23 @@
       </div>
       <div class = "col col-md-4">
         <div>
-          <%= @item.name %>
+          <h4><%= @item.name %></h4>
         </div>
         <div>
           <%= @item.introduction %>
         </div>
+        </br>
         <div>
-          <%= @item.price %>
-        </div>
+        <b>￥<%= @item.price %>(税込)</b>
+          </div>
+          </br>
+            <div class="row">
             <%= form_with model:@cart_item, url: cart_items_path(current_customer.id), local:true do |f| %>
-                <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
+                <%= f.number_field :amount, min:1, placeholder: "個数選択", class: "form-group col-xs-6" %>
                 <%= f.hidden_field :item_id, :value => @item.id %>
-                <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
+                <%= f.submit "カートに入れる", class: "btn btn-success form-group col-xs-6" %>
             <% end %>
+            </div>
       </div>
     </div>
   </div>
